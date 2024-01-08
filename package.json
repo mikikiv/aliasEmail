@@ -11,8 +11,8 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "lint": "eslint ./src",
-    "format": "prettier ./src --write",
+    "lint": "eslint ./lib",
+    "format": "prettier ./lib --write",
     "test": "jest"
   },
   "jest": {
