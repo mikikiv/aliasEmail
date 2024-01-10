@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { aliasedEmail, aliasedEmailObject } from "../dist/index";
+import aliasedEmail, { aliasedEmailObject } from "../dist";
 
 test("Adding a custom alias", () => {
   expect(aliasedEmail("example@test.com", "test")).toEqual("example+test@test.com");

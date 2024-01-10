@@ -1,12 +1,11 @@
 {
   "name": "aliased-email",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Return an aliased version of the inputted email. By default, adds a timestamp.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "lib",
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "tsc --watch",
