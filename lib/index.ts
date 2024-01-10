@@ -3,12 +3,15 @@ class EmailAlias {
   private aliasedEmailPattern = /^[a-zA-Z0-9._%-][+][a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   private email: string;
   private alias: string;
+  private timestamp: Date;
 
   constructor(email: string, alias?: string) {
     this.email = email;
-    this.alias = alias?.trim().replace(/s/g, "")
-      ? alias?.trim().replace(/\s+/g, ".")
-      : new Date().toISOString().replace(/:/g, ".");
+    this.timestamp = new Date();
+    this.alias =
+      alias?.trim() !== "" && alias
+        ? alias.trim().replace(/\s+/g, ".")
+        : this.timestamp.toISOString().slice(0, -5).replace(/:/g, ".");
   }
 
   private invalidEmail(email: string) {
@@ -24,24 +27,13 @@ class EmailAlias {
   }
 
   aliasedEmailObject() {
-    const timestamp = new Date().toISOString();
     const isEmailInvalid = this.invalidEmail(this.email);
 
-    if (isEmailInvalid) {
-      return {
-        aliasedEmail: "",
-        email: this.email,
-        alias: this.alias,
-        createdAt: timestamp,
-        error: isEmailInvalid,
-      };
-    }
-
     return {
-      aliasedEmail: this.addAliasToEmail(this.alias.trim().replace(/\s+/g, ".")),
+      aliasedEmail: isEmailInvalid ? "" : this.addAliasToEmail(this.alias),
       email: this.email,
-      alias: this.alias.trim().replace(/\s+/gm, "."),
-      createdAt: timestamp,
+      alias: this.alias,
+      createdAt: this.timestamp,
       error: isEmailInvalid,
     };
   }
